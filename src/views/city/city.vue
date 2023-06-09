@@ -17,13 +17,10 @@
         </div>
 
     <div class="content">
-        <template v-for="item in currentGroup?.cities">
-            <div >
-                {{ item }}
-            </div>
+        <template v-for="(value,key,index) in allCities">
+            <city-group v-show="tabActive === key" :groupData="value"/>
         </template>
     </div>
-
     </div>
 </template>
 
@@ -33,6 +30,7 @@ import { useRouter } from 'vue-router';
 import  useCityStore from '@/stores/modules/city'
 import { storeToRefs } from 'pinia';
 import { computed } from '@vue/reactivity';
+import cityGroup from './cpns/city-group.vue';
 
 //search
 const searchValue = ref("")
