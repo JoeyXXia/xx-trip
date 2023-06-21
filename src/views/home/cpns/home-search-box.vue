@@ -8,7 +8,7 @@
             </div>
         </div>
 
-        <div class="section date-range">
+        <div class="section date-range" @click="showCalendar = true">
             <div class="start">
                 <div class="date">
                     <span class="tip">入住</span>
@@ -16,7 +16,7 @@
                 </div>
             </div>
             <div class="stay">
-                <span>1 day</span>
+                <span>共 {{ stayCount }} 晚</span>
             </div>
             <div class="end">
                 <div class="date">
@@ -25,6 +25,13 @@
                 </div>
             </div>
         </div>
+        <van-calendar 
+            v-model:show="showCalendar" 
+            type="range" 
+            :round="false"
+            color="#ff9854"
+            @confirm="onConfirm" 
+            />
     </div>
 </template>
 
@@ -33,7 +40,7 @@ import { useRouter } from 'vue-router';
 import useCityStore from '@/stores/modules/city';
 import { storeToRefs } from 'pinia';
 import { ref } from 'vue';
-import {formatMonthDay} from '@/utils/format_date'
+import {formatMonthDay, getDiffDays} from '@/utils/format_date'
 
 const router = useRouter();
 
@@ -58,12 +65,30 @@ const { currentCity } = storeToRefs(cityStore)
 
 // select date
 const nowDate = new Date()
+const newDate = new Date() 
+newDate.setDate(nowDate.getDate() + 1)
+
 const startDate = ref(formatMonthDay(nowDate))
-const newDate = nowDate.setDate(nowDate.getDate() + 1)
 const endDate = ref(formatMonthDay(newDate))
+const stayCount = ref(1)
+
+// calendar
+const showCalendar = ref(false)
+const onConfirm = (value) => {
+    const selectStartDate = value[0]
+    const selectEndDate = value[1]
+    startDate.value = formatMonthDay(selectStartDate)
+    endDate.value = formatMonthDay(selectEndDate)
+    stayCount.value = getDiffDays(selectStartDate,selectEndDate)
+    showCalendar.value = false
+}
 </script>
 
 <style lang="less" scoped>
+
+    .search-box {
+        --van-calendar-popup-height:100%;
+    }
         .location {
         display: flex;
         align-items: center;
