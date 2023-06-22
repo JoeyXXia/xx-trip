@@ -32,6 +32,13 @@
             color="#ff9854"
             @confirm="onConfirm" 
             />
+
+        <div class="section price-couter bottom-gray-line">
+            <div class="start">价格不限</div>
+            <div class="end">人数不限</div>
+        </div>
+
+        <div class="section keyword bottom-gray-line">关键字/位置/民宿名</div>
     </div>
 </template>
 
@@ -164,6 +171,11 @@ const onConfirm = (value) => {
                 text-align: center;
                 font-size: 12px;
                 color: #666;
+            }
+        }
+        .price-couter {
+            .start {
+                border-right: 1px solid var(--line-color);
             }
         }
 
