@@ -39,12 +39,24 @@
         </div>
 
         <div class="section keyword bottom-gray-line">关键字/位置/民宿名</div>
+
+        <div class="section hot-suggests">
+            <template v-for="(item,index) in hotSuggests" :key="index">
+                <div
+                    class="item"
+                    :style="{color:item.tagText.color,background:item.tagText.background.color}"
+                >
+                    {{  item.tagText.text }}
+                </div>
+            </template>
+        </div>
     </div>
 </template>
 
 <script setup>
 import { useRouter } from 'vue-router';
 import useCityStore from '@/stores/modules/city';
+import useHomeStore from '@/stores/modules/home';
 import { storeToRefs } from 'pinia';
 import { ref } from 'vue';
 import {formatMonthDay, getDiffDays} from '@/utils/format_date'
@@ -89,6 +101,10 @@ const onConfirm = (value) => {
     stayCount.value = getDiffDays(selectStartDate,selectEndDate)
     showCalendar.value = false
 }
+
+//hot suggest
+const homeStore = useHomeStore()
+const {hotSuggests} = storeToRefs(homeStore)
 </script>
 
 <style lang="less" scoped>
@@ -176,6 +192,18 @@ const onConfirm = (value) => {
         .price-couter {
             .start {
                 border-right: 1px solid var(--line-color);
+            }
+        }
+        .hot-suggests {
+            margin: 10px 0;
+            height: auto;
+
+            .item {
+                padding: 4px 8px;
+                margin: 4px;
+                border-radius: 14px;
+                font-size: 12px;
+                line-height: 1;
             }
         }
 
