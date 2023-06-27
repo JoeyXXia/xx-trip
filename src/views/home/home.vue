@@ -5,6 +5,7 @@
             <img src="@/assets/img/home/banner.webp" alt="">
         </div>
         <home-search-box/>
+        <home-categories/>
         </div>
 </template>
 
@@ -12,11 +13,13 @@
 
 import HomeNavBar from './cpns/home-nav-bar.vue'
 import HomeSearchBox from './cpns/home-search-box.vue';
+import HomeCategories from './cpns/home-categories.vue'
 import useHomeStore from '@/stores/modules/home';
 
 // sending network requests
 const homeStore = useHomeStore()
 homeStore.fetchHotSuggestData()
+homeStore.fetchCategoriesData()
 </script>
 
 <style lang="less" scoped>
