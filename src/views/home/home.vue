@@ -6,6 +6,8 @@
         </div>
         <home-search-box/>
         <home-categories/>
+        <home-content/>
+        <button @click="moreBtnClick">loading more</button>
         </div>
 </template>
 
@@ -14,19 +16,34 @@
 import HomeNavBar from './cpns/home-nav-bar.vue'
 import HomeSearchBox from './cpns/home-search-box.vue';
 import HomeCategories from './cpns/home-categories.vue'
+import HomeContent from './cpns/home-content.vue'
+
 import useHomeStore from '@/stores/modules/home';
 
 // sending network requests
 const homeStore = useHomeStore()
 homeStore.fetchHotSuggestData()
 homeStore.fetchCategoriesData()
+homeStore.fetchHouseListData()
+
+//load more
+const moreBtnClick = () => {
+    console.log("load more")
+    homeStore.fetchHouseListData()
+
+}
 </script>
 
 <style lang="less" scoped>
-
-    .banner 
+    .home {
+        padding-bottom: 60px;
+        &::-webkit-scrollbar {
+            height: 5px;
+        }
+    .banner
     img {
         width: 100%;
     }
-    
+}
+
 </style>
