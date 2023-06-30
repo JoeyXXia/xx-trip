@@ -1,13 +1,14 @@
+import useMainStore from '@/stores/modules/main';
 <template>
     <div class="search">
         <div class="select-time left">
             <div class="item start">
                 <div class="name">住</div>
-                <div class="date">3413242</div>
+                <div class="date">{{startDateStr}}</div>
             </div>
             <div class="item end">
                 <div class="name">离</div>
-                <div class="date">32423</div>
+                <div class="date">{{endDateStr}}</div>
             </div>
         </div>
         <div class="content">
@@ -20,6 +21,15 @@
 </template>
 
 <script setup>
+import useMainStore from '@/stores/modules/main'
+import { formatMonthDay } from '@/utils/format_date';
+import { computed } from 'vue';
+import { storeToRefs } from 'pinia';
+
+const mainStore = useMainStore()
+const { startDate, endDate } = storeToRefs(mainStore)
+const startDateStr = computed( () => formatMonthDay(startDate.value,"MM.DD"))
+const endDateStr = computed( () => formatMonthDay(endDate.value,"MM.DD"))
 
 </script>
 
