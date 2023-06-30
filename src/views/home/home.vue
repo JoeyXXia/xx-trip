@@ -6,8 +6,10 @@
         </div>
         <home-search-box/>
         <home-categories/>
+        <div class="search-bar">
+            <search-bar/>
+        </div>
         <home-content/>
-        <!-- <button @click="moreBtnClick">loading more</button> -->
         </div>
 </template>
 
@@ -18,6 +20,7 @@ import HomeNavBar from './cpns/home-nav-bar.vue'
 import HomeSearchBox from './cpns/home-search-box.vue';
 import HomeCategories from './cpns/home-categories.vue'
 import HomeContent from './cpns/home-content.vue'
+import SearchBar from '@/components/search-bar/search-bar.vue';
 
 import useHomeStore from '@/stores/modules/home';
 
