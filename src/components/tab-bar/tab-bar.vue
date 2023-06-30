@@ -19,9 +19,16 @@
 <script setup>
 import tabbarData from '@/assets/data/tabbar.js'
 import { getAssetURL } from '@/utils/load_assets.js'
-import { ref } from 'vue'
+import { ref, watch } from 'vue';
+import { useRoute } from 'vue-router';
 
+const route = useRoute()
 const currentIndex = ref(0)
+watch(route, (newValue) => {
+    const index = tabbarData.findIndex( item => item.path === newValue.path)
+    if(index === -1) return
+    currentIndex.value = index
+})
 
 
 </script>
