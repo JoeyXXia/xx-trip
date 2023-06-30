@@ -28,5 +28,5 @@ export default function useScroll() {
         window.removeEventListener("scroll",scrollListenerHandler)
     })
 
-    return { isReachBottom}
+    return { isReachBottom,clientHeight,scrollTop,scrollHeight}
 }
