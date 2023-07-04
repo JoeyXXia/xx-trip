@@ -12,13 +12,23 @@
 
 <script setup>
 import { useRoute, useRouter } from 'vue-router';
+import { getDetailInfos } from "@/services"
+import { ref, computed } from 'vue';
 
 const router = useRouter()
 const route = useRoute()
+const houseId = route.params.id
 
 const onClickLeft = () => {
     router.back()
 }
+
+const detailInfos = ref({})
+const mainPart = computed( () => detailInfos.value.mainPart)
+// sending netowrk request 
+getDetailInfos(houseId).then( res => {
+    detailInfos.value = res.data
+})
 </script>
 
 <style lang="less" scoped>
