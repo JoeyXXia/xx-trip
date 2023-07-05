@@ -6,6 +6,10 @@
                     <img :src="item.url" alt="">
                 </van-swipe-item>
             </template>
+
+            <template #indicator="props">
+            <div class="indicator">{{ props.active  }}/{{ props.total }}</div>
+            </template>
         </van-swipe>
     </div>
 </template>
@@ -29,6 +33,16 @@ defineProps({
                 width: 100%;
             }
         }
+
+        .indicator {
+            position: absolute;
+            right: 5px;
+            bottom: 5px;
+            padding: 2px 5px;
+            font-size: 12px;
+            background: rgba(0, 0, 0, 0.1);
+            color: #fff;
+            }
     }
 }
 </style>
