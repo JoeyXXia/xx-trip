@@ -8,7 +8,11 @@
             </template>
 
             <template #indicator="props">
-            <div class="indicator">{{ props.active  }}/{{ props.total }}</div>
+            <div class="indicator">
+                <template v-for="(value,key,index) in swipeGroup" :key="key">
+                    <span class="item">{{ getName(value[0].title) }}</span>
+                </template>
+            </div>
             </template>
         </van-swipe>
     </div>
@@ -16,12 +20,33 @@
 
 <script setup>
 
-defineProps({
+const props = defineProps({
     swipeData: {
         type:Array,
         default: () => []
     }
 })
+
+// change data format
+const swipeGroup = {}
+
+for ( const item of props.swipeData) {
+    let valueArray = swipeGroup[item.enumPictureCategory]
+    if(!valueArray) {
+        valueArray = []
+        swipeGroup[item.enumPictureCategory] = valueArray
+    }
+    valueArray.push(item)
+}
+
+//regre for swipe data
+const nameReg  = /【(.*?)】/i
+const getName = (name) => {
+
+    const results  = nameReg.exec(name)
+    return results[1]
+}
+
 </script>
 
 <style lang="less" scoped>
@@ -39,9 +64,13 @@ defineProps({
             right: 5px;
             bottom: 5px;
             padding: 2px 5px;
+            display: flex;
             font-size: 12px;
             background: rgba(0, 0, 0, 0.1);
             color: #fff;
+            }
+            .item {
+                margin: 0 3px;
             }
     }
 }
