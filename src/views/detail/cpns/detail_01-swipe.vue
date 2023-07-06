@@ -22,6 +22,8 @@
             </template>
         </van-swipe>
     </div>
+
+    
 </template>
 
 <script setup>
@@ -77,7 +79,7 @@ const getCateggoryIndex = (item) => {
             padding: 2px 5px;
             display: flex;
             font-size: 12px;
-            background: rgba(0, 0, 0, 0.1);
+            background: rgba(0, 0, 0, 0.8);
             color: #fff;
             }
             .itemText {
