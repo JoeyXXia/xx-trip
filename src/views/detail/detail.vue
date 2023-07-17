@@ -11,6 +11,7 @@
             <detail-infos :top-infos="mainPart.topModule"/>
             <detail-facility name="facility" :house-facility="mainPart.dynamicModule.facilityModule.houseFacility"/>
             <detail-landlord name="landlord" :landlord="mainPart.dynamicModule.landlordModule"/>
+            <detail-comment name="comment" :comment="mainPart.dynamicModule.commentModule"/>
         </div>
     </div>
 </template>
@@ -24,6 +25,7 @@ import DetailSwipe from "./cpns/detail_01-swipe.vue"
 import DetailInfos from "./cpns/detail_02-infos.vue"
 import DetailFacility from './cpns/detail_03-facility.vue'
 import DetailLandlord from './cpns/detail_04-landlord.vue'
+import DetailComment from './cpns/detail_05-comment.vue'
 
 const router = useRouter()
 const route = useRoute()
@@ -35,7 +37,7 @@ const onClickLeft = () => {
 
 const detailInfos = ref({})
 const mainPart = computed( () => detailInfos.value.mainPart)
-// sending netowrk request 
+// sending netowrk request
 getDetailInfos(houseId).then( res => {
     detailInfos.value = res.data
 })
