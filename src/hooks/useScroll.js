@@ -1,32 +1,40 @@
-import { onMounted,onUnmounted, ref } from "vue";
-import { throttle } from "underscore";
+import { onMounted, onUnmounted, ref } from "vue"
+import { throttle } from "underscore"
 
-export default function useScroll() {
-    const isReachBottom = ref(false)
+export default function useScroll(elRef) {
+  let el = window
 
-    const clientHeight = ref(0)
-    const scrollTop = ref(0)
-    const scrollHeight = ref(0)
+  const isReachBottom = ref(false)
 
+  const clientHeight = ref(0)
+  const scrollTop = ref(0)
+  const scrollHeight = ref(0)
 
-    const scrollListenerHandler =throttle( () => {
-        clientHeight.value = document.documentElement.clientHeight
-        scrollTop.value = document.documentElement.scrollTop
-        scrollHeight.value = document.documentElement.scrollHeight
-        
-        if( clientHeight.value + scrollTop.value + 1 >= scrollHeight.value)  {
-            isReachBottom.value = true
-            console.log('reach bottom')
-        }
-    },100)
+  const scrollListenerHandler = throttle(() => {
+    if (el == window) {
+      clientHeight.value = document.documentElement.clientHeight
+      scrollTop.value = document.documentElement.scrollTop
+      scrollHeight.value = document.documentElement.scrollHeight
+    } else {
+      clientHeight.value = el.clientHeight
+      scrollTop.value = el.scrollTop
+      scrollHeight.value = el.scrollHeight
+    }
 
-    onMounted( () => {
-        window.addEventListener("scroll",scrollListenerHandler)
-    })
+    if (clientHeight.value + scrollTop.value + 1 >= scrollHeight.value) {
+      isReachBottom.value = true
+      console.log("reach bottom")
+    }
+  }, 100)
 
-    onUnmounted( () => {
-        window.removeEventListener("scroll",scrollListenerHandler)
-    })
+  onMounted(() => {
+    if (elRef) el = elRef.value
+    el.addEventListener("scroll", scrollListenerHandler)
+  })
 
-    return { isReachBottom,clientHeight,scrollTop,scrollHeight}
+  onUnmounted(() => {
+    el.removeEventListener("scroll", scrollListenerHandler)
+  })
+
+  return { isReachBottom, clientHeight, scrollTop, scrollHeight }
 }
