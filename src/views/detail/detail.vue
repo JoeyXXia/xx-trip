@@ -1,5 +1,9 @@
 <template>
   <div class="detail top-page">
+    <tab-control
+      :titles="['描述', '设施', '房东', '评论']"
+      @tab-item-click="tabClick"
+    />
     <van-nav-bar
       title="房屋详情"
       left-text="旅途"
@@ -51,6 +55,7 @@ import DetailComment from "./cpns/detail_05-comment.vue"
 import DetailNotice from "./cpns/detail_06-notice.vue"
 import DetailMap from "./cpns/detail_07-map.vue"
 import DetailIntro from "./cpns/detail_08-intro.vue"
+import TabControl from "@/components/tab-control/tab-control.vue"
 
 const router = useRouter()
 const route = useRoute()
@@ -66,6 +71,10 @@ const mainPart = computed(() => detailInfos.value.mainPart)
 getDetailInfos(houseId).then((res) => {
   detailInfos.value = res.data
 })
+
+const tabClick = (index) => {
+  console.log("children back", index)
+}
 </script>
 
 <style lang="less" scoped>
