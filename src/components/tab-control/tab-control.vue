@@ -1,4 +1,3 @@
-import { ref } from 'vue';
 <template>
   <div class="tab-control">
     <template v-for="(item, index) in titles" :key="item">
@@ -15,6 +14,7 @@ import { ref } from 'vue';
 
 <script setup>
 import { ref } from "vue"
+
 defineProps({
   titles: {
     type: Array,
@@ -24,11 +24,10 @@ defineProps({
 
 const currentIndex = ref(0)
 
-const emit = defineEmits(["tab-item-click"])
+const emit = defineEmits(["tabItemClick"])
 const itemClick = (index) => {
   currentIndex.value = index
-  console.log("chid click", currentIndex.value)
-  emit[("tab-item-click", index)]
+  emit("tabItemClick", index)
 }
 </script>
 

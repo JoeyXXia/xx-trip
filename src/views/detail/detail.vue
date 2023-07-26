@@ -2,7 +2,7 @@
   <div class="detail top-page">
     <tab-control
       :titles="['描述', '设施', '房东', '评论']"
-      @tab-item-click="tabClick"
+      @tabItemClick="tabClick"
     />
     <van-nav-bar
       title="房屋详情"
