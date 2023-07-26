@@ -1,8 +1,11 @@
 <template>
-  <div class="detail top-page">
+  <div class="detail top-page" ref="detailRef">
     <tab-control
-      :titles="['描述', '设施', '房东', '评论']"
+      class="tabs"
+      v-if="showTabControl"
+      :titles="names"
       @tabItemClick="tabClick"
+      ref="tabControlRef"
     />
     <van-nav-bar
       title="房屋详情"
@@ -10,27 +13,36 @@
       left-arrow
       @click-left="onClickLeft"
     />
-    <div class="main" v-if="mainPart">
+    <div class="main" v-if="mainPart" v-memo="[mainPart]">
       <detail-swipe :swipe-data="mainPart.topModule.housePicture.housePics" />
-      <detail-infos :top-infos="mainPart.topModule" />
+      <detail-infos
+        name="描述"
+        :ref="getSectionRef"
+        :top-infos="mainPart.topModule"
+      />
       <detail-facility
-        name="facility"
+        name="设施"
+        :ref="getSectionRef"
         :house-facility="mainPart.dynamicModule.facilityModule.houseFacility"
       />
       <detail-landlord
-        name="landlord"
+        name="房东"
+        :ref="getSectionRef"
         :landlord="mainPart.dynamicModule.landlordModule"
       />
       <detail-comment
-        name="comment"
+        name="评论"
+        :ref="getSectionRef"
         :comment="mainPart.dynamicModule.commentModule"
       />
       <detail-notice
-        name="notice"
+        name="须知"
+        :ref="getSectionRef"
         :order-rules="mainPart.dynamicModule.rulesModule.orderRules"
       />
       <detail-map
-        name="map"
+        name="周边"
+        :ref="getSectionRef"
         :position="mainPart.dynamicModule.positionModule"
       />
       <detail-intro :price-intro="mainPart.introductionModule" />
@@ -56,6 +68,7 @@ import DetailNotice from "./cpns/detail_06-notice.vue"
 import DetailMap from "./cpns/detail_07-map.vue"
 import DetailIntro from "./cpns/detail_08-intro.vue"
 import TabControl from "@/components/tab-control/tab-control.vue"
+import useScroll from "@/hooks/useScroll"
 
 const router = useRouter()
 const route = useRoute()
@@ -72,12 +85,49 @@ getDetailInfos(houseId).then((res) => {
   detailInfos.value = res.data
 })
 
+const detailRef = ref()
+const { scrollTop } = useScroll(detailRef)
+const showTabControl = computed(() => {
+  return scrollTop.value >= 300
+})
+
+const sectionEls = ref({})
+const names = computed(() => {
+  return Object.keys(sectionEls.value)
+})
+const getSectionRef = (value) => {
+  if (!value) return
+  const name = value.$el.getAttribute("name")
+  sectionEls.value[name] = value.$el
+}
+
+let isClick = false
+let currentDistance = -1
 const tabClick = (index) => {
-  console.log("children back", index)
+  const key = Object.keys(sectionEls.value)[index]
+  const el = sectionEls.value[key]
+  let distance = el.offsetTop
+  if (index != 0) {
+    distance = distance - 44
+  }
+  isClick = true
+  currentDistance = distance
+  detailRef.value.scrollTo({
+    top: distance,
+    behavior: "smooth",
+  })
 }
 </script>
 
 <style lang="less" scoped>
+.tabs {
+  position: fixed;
+  z-index: 9;
+  left: 0;
+  right: 0;
+  top: 0;
+}
+
 .footer {
   display: flex;
   flex-direction: column;
