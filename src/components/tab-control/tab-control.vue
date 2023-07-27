@@ -29,6 +29,15 @@ const itemClick = (index) => {
   currentIndex.value = index
   emit("tabItemClick", index)
 }
+
+const setCurrentIndex = (index) => {
+  currentIndex.value = index
+}
+
+defineExpose({
+  currentIndex,
+  setCurrentIndex,
+})
 </script>
 
 <style lang="less" scoped>

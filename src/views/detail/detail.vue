@@ -57,7 +57,7 @@
 <script setup>
 import { useRoute, useRouter } from "vue-router"
 import { getDetailInfos } from "@/services"
-import { ref, computed } from "vue"
+import { ref, computed, watch } from "vue"
 
 import DetailSwipe from "./cpns/detail_01-swipe.vue"
 import DetailInfos from "./cpns/detail_02-infos.vue"
@@ -117,6 +117,28 @@ const tabClick = (index) => {
     behavior: "smooth",
   })
 }
+
+// page scroll
+const tabControlRef = ref()
+
+watch(scrollTop, (newValue) => {
+  if (newValue === currentDistance) {
+    isClick = false
+  }
+  if (isClick) return
+
+  const els = Object.values(sectionEls.value)
+  const values = els.map((el) => el.offsetTop)
+
+  let index = values.length - 1
+  for (let i = 0; i < values.length; i++) {
+    if (values[i] > newValue + 44) {
+      index = i - 1
+      break
+    }
+  }
+  tabControlRef.value?.setCurrentIndex(index)
+})
 </script>
 
 <style lang="less" scoped>
