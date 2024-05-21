@@ -2,4 +2,8 @@
 
 vue3 app
 
-api is overdue now
+# page display
+
+## city page
+
+![alt text](image-2.png) ![alt text](image-3.png)
