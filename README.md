@@ -6,4 +6,4 @@ vue3 app
 
 ## city page
 
-![alt text](image-2.png) ![alt text](image-3.png)
+![alt text](display-images/image-2.png) ![alt text](display-images/image-3.png)
