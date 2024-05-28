@@ -1,14 +1,15 @@
 <template>
   <div class="search">
-    <search-bar />
-    <h2>{{ $route.query.startDate }}</h2>
-    <h2>{{ $route.query.endDate }}</h2>
-    <h2>{{ $route.query.currentCity }}</h2>
+    <search-header />
+    <search-filter />
+    <search-content />
   </div>
 </template>
 
 <script setup>
-import searchBar from "@/components/search-bar/search-bar.vue"
+import searchHeader from "./cpns/search-header.vue"
+import searchFilter from "./cpns/search-filter.vue"
+import searchContent from "./cpns/search-content.vue"
 </script>
 
 <style lang="less" scoped></style>
