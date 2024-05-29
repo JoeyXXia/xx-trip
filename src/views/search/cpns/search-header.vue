@@ -1,9 +1,15 @@
 <template>
   <div class="search-header">
-    <h2>search-header</h2>
+    <search-bar-v2 />
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import SearchBarV2 from "@/components/search-bar/search-bar-v2.vue"
+</script>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+.search-header {
+  margin: 8px 8px;
+}
+</style>
