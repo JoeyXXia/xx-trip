@@ -10,6 +10,6 @@ import SearchBarV2 from "@/components/search-bar/search-bar-v2.vue"
 
 <style lang="less" scoped>
 .search-header {
-  margin: 8px 8px;
+  margin: 6px 6px;
 }
 </style>
