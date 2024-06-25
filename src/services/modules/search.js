@@ -2,7 +2,7 @@ import xxRequest from "../request"
 
 export function getSearchTop() {
   return xxRequest.get({
-    url: "/home/search/top",
+    url: "/search/top",
   })
 }
 

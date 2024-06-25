@@ -1,7 +1,7 @@
 import { getSearchTop, getSearchResult } from "@/services/modules/search"
 import { defineStore } from "pinia"
 
-const useHomeStore = defineStore("search", {
+const useSearchStore = defineStore("search", {
   state: () => ({
     searchTop: [],
     searchResult: [],
@@ -9,13 +9,13 @@ const useHomeStore = defineStore("search", {
   actions: {
     async fetchSearchTopData() {
       const res = await getSearchTop()
-      this.searchTop = res.data
+      this.searchTop = res.data.data
     },
     async fetchSearchResultData() {
       const res = await getSearchResult()
-      this.searchResult = res.data
+      this.searchResult = res.data.data
     },
   },
 })
 
-export default useHomeStore
+export default useSearchStore
