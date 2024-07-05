@@ -1,15 +1,16 @@
 <template>
   <div class="search">
-    <search-header />
-    <search-filter />
-    <search-content />
+    <div class="search-nav-bar">
+      <nav-bar>nav-bar</nav-bar>
+    </div>
+
+    <!-- <search-panel /> -->
   </div>
 </template>
 
 <script setup>
-import searchHeader from "./cpns/search-header.vue"
-import searchFilter from "./cpns/search-filter.vue"
-import searchContent from "./cpns/search-content.vue"
+import searchPanel from "./cpns/search-panel.vue"
+import navBar from "@/components/nav-bar/nav-bar.vue"
 import useSearchStore from "@/stores/modules/seaarch"
 
 const searchStore = useSearchStore()

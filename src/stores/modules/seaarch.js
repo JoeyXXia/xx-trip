@@ -3,8 +3,8 @@ import { defineStore } from "pinia"
 
 const useSearchStore = defineStore("search", {
   state: () => ({
-    searchTop: [],
-    searchResult: [],
+    searchTop: {},
+    searchResult: {},
   }),
   actions: {
     async fetchSearchTopData() {

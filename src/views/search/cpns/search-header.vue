@@ -6,6 +6,7 @@
 
 <script setup>
 import SearchBarV2 from "@/components/search-bar/search-bar-v2.vue"
+
 </script>
 
 <style lang="less" scoped>
