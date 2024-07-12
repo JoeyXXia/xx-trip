@@ -1,21 +1,70 @@
 <template>
   <div class="search">
     <div class="search-nav-bar">
-      <nav-bar>nav-bar</nav-bar>
+      <nav-bar class="" :border="false">
+        <template #title>
+          <xx-search-bar
+            :title="routeQuery.address"
+            :start-date="routeQuery.startDate"
+            :end-date="routeQuery.endDate"
+            :keyword="keyword"
+            :cancel-icon="showCancelIcon"
+            @cancel-click="handleCancelClick"
+            @search-click="handleSearchClick"
+          ></xx-search-bar>
+        </template>
+      </nav-bar>
     </div>
 
-    <!-- <search-panel /> -->
+    <search-result-item></search-result-item>
+    <!-- <search-panel></search-panel> -->
   </div>
 </template>
 
 <script setup>
-import searchPanel from "./cpns/search-panel.vue"
 import navBar from "@/components/nav-bar/nav-bar.vue"
-import useSearchStore from "@/stores/modules/seaarch"
+import xxSearchBar from "@/components/search-bar/xx-searchbar.vue"
+import searchResultItem from "./cpns/search-result-item.vue"
+import searchPanel from "./cpns/search-panel.vue"
+import { useRoute, useRouter } from "vue-router"
+import { ref } from "vue"
+import { getSearchResult, getSearchTop } from "@/services/modules/search"
 
-const searchStore = useSearchStore()
-searchStore.fetchSearchTopData()
-searchStore.fetchSearchResultData()
+const route = useRoute()
+const router = useRouter()
+const PLACEHOLDER = "搜索博尔塔拉的景点、地标、房源"
+
+const showSearchPanel = ref(false)
+const searchResult = ref([])
+const searchTop = ref([])
+const guessLike = ref([])
+
+const routeQuery = ref(route.query)
+const showCancelIcon = ref(false)
+const keyword = ref(PLACEHOLDER)
+
+// newwork request
+getSearchTop().then((res) => {
+  searchTop.value = res.data.data.allConditions
+})
+
+getSearchResult().then((res) => {
+  searchResult.value = res.data
+})
+
+// click  event
+const arrowIconClick = () => {
+  router.go(-1)
+}
+
+const handleSearchClick = () => {
+  showSearchPanel.value = true
+}
+
+const handleCancelClick = () => {
+  keyword.value = PLACEHOLDER
+  showCancelIcon.value = false
+}
 </script>
 
 <style lang="less" scoped></style>

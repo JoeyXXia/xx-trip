@@ -21,9 +21,9 @@
 
 <script setup>
 import useMainStore from "@/stores/modules/main"
-import { formatMonthDay } from "@/utils/format_date"
 import { computed } from "vue"
 import { storeToRefs } from "pinia"
+import { formatMonthDay } from "@/utils/format_date"
 
 const mainStore = useMainStore()
 const { startDate, endDate } = storeToRefs(mainStore)
