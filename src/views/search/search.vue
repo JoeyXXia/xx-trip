@@ -40,6 +40,7 @@ const searchTop = ref([])
 const guessLike = ref([])
 
 const routeQuery = ref(route.query)
+console.log("routeQuery", routeQuery.value)
 const showCancelIcon = ref(false)
 const keyword = ref(PLACEHOLDER)
 

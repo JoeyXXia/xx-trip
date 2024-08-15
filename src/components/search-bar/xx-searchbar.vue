@@ -34,6 +34,8 @@
 </template>
 
 <script setup>
+import dayjs from "dayjs"
+
 const props = defineProps({
   title: {
     type: String,
@@ -70,7 +72,7 @@ const props = defineProps({
 })
 
 const formatDate = (date) => {
-  return date.split("-").join(".")
+  return dayjs(date).format("MM月DD日")
 }
 
 const emit = defineEmits(["cancelClick", "searchClick"])
