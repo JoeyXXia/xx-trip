@@ -17,6 +17,12 @@
     </div>
 
     <dropdown-select :item-data="searchTop"></dropdown-select>
+
+    <div class="tab-wrapper">优惠，多人入住</div>
+
+    <div class="list">search house</div>
+
+    <search-panel> </search-panel>
   </div>
 </template>
 
@@ -46,6 +52,7 @@ const keyword = ref(PLACEHOLDER)
 // newwork request
 getSearchTop().then((res) => {
   searchTop.value = res.data.data.allConditions
+  console.log("searchTop", searchTop)
 })
 
 getSearchResult().then((res) => {
