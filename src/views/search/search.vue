@@ -16,7 +16,7 @@
       </nav-bar>
     </div>
 
-    <dropdown-select />
+    <dropdown-select :item-data="searchTop"></dropdown-select>
   </div>
 </template>
 

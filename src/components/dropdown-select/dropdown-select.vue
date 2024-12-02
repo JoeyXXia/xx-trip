@@ -11,11 +11,9 @@
 
       <van-dropdown-item
         v-if="item.gType === 4"
-        title="位置"
-        :ref="dropdownItemRefs"
-      >
-        <div class="dropdown-bar-panel-content"></div>
-      </van-dropdown-item>
+        v-model="value"
+        :options="options"
+      />
 
       <van-dropdown-item
         v-if="item.gType === 1"
