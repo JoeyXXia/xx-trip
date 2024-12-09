@@ -6,7 +6,13 @@
         title="位置"
         :ref="dropdownItemRefs"
       >
-        <div class="dropdown-bar-panel-content"></div>
+        <div class="dropdown-bar-panel-content">
+          <side-bar
+            class="top"
+            :menuData="item.subGroups"
+            @item-click="handleSideSubItemClick"
+          ></side-bar>
+        </div>
       </van-dropdown-item>
 
       <van-dropdown-item
@@ -28,6 +34,7 @@
 
 <script setup>
 import { ref } from "vue"
+import SideBar from "../side-bar/side-bar.vue"
 
 defineProps({
   itemData: {

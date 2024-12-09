@@ -22,7 +22,7 @@
 
     <div class="list">search house</div>
 
-    <search-panel> </search-panel>
+    <!-- <search-panel> </search-panel> -->
   </div>
 </template>
 
