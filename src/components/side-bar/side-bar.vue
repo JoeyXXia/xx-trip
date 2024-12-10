@@ -30,7 +30,7 @@
         </template>
 
         <!-- sub menu -->
-        <template>
+        <template v-if="getSubSide.length">
           <div class="sub-side-panel">
             <div class="sub-side-bar">
               <van-sidebar
@@ -76,6 +76,11 @@ const props = defineProps({
   },
 })
 
+// side bar
+const currentSideActive = ref(0)
+const currentSubSideActive = ref(0)
+const sideDatas = ref([])
+
 watch(
   () => props.menuData,
   (newValue, oldValue) => {
@@ -100,11 +105,6 @@ const getSubSide = computed(() => {
   let subMenus = sideDatas.value[currentSideActive.value].subGroups || []
   return subMenus
 })
-
-// side bar
-const currentSideActive = ref(0)
-const currentSubSideActive = ref(0)
-const sideDatas = ref([])
 
 const onSideMenuChange = () => {
   console.log(`${currentSideActive.value}`)
@@ -147,4 +147,69 @@ const handleSubItemClick = (index) => {
 }
 </script>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+@popupHeight: 500px;
+
+.side-bar :deep(.van-sidebar) {
+  height: calc(@popupHeight - 60px);
+}
+
+.side-bar {
+  display: flex;
+  flex-direction: row;
+  .content {
+    flex: 1;
+    overflow-y: auto;
+    height: calc(@popupHeight - 60px);
+    background-color: white;
+
+    .list-item {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 55px;
+
+      padding: 0 20px 0 10px;
+      margin-right: 20px;
+      margin-left: 12px;
+
+      font-size: 14px;
+
+      .name {
+        padding-bottom: 6px;
+      }
+
+      .desp {
+        font-size: 12px;
+        color: #999;
+      }
+    }
+  }
+}
+
+.acitve {
+  background-color: #fffcf5;
+  .name {
+    color: var(--primary-color);
+  }
+}
+
+.sub-side-panel {
+  display: flex;
+  flex-direction: row;
+  .sub-side-bar {
+    border-right: 1px solid #f8f8f8;
+  }
+  .sub-side-bar :deep(.van-sidebar) {
+    background-color: white !important;
+  }
+}
+
+.sub-content {
+  flex: 1;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  height: calc(@popupHeight - 60px);
+}
+</style>
