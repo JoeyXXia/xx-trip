@@ -32,6 +32,12 @@
               <p class="list-content">正在开发中。。。。</p>
             </template>
           </side-bar>
+          <view-house-btns
+            class="bottom"
+            @clear="handleClearClick()"
+            @view-click="handleViewClick()"
+          >
+          </view-house-btns>
         </div>
       </van-dropdown-item>
     </template>
@@ -41,6 +47,7 @@
 <script setup>
 import { ref } from "vue"
 import SideBar from "../side-bar/side-bar.vue"
+import ViewHouseBtns from "../view-house-btns/view-house-btns.vue"
 
 defineProps({
   itemData: {
@@ -48,6 +55,7 @@ defineProps({
     default: () => [],
   },
 })
+const dropdownRefs = {}
 
 // dropdown
 const value = ref(0)
@@ -58,6 +66,22 @@ const options = [
   { text: "低价优先", value: 3 },
   { text: "高价优先", value: 4 },
 ]
+
+const dropdownItemRefs = (el) => {
+  if (el) {
+    dropdownRefs[el.title] = el
+  }
+}
+
+const handleClearClick = (title) => {
+  dropdownRefs[title]?.toggle()
+}
+
+const handleViewClick = (title) => {
+  dropdownRefs[title]?.toggle()
+}
+
+const handleSideSubItemClick = (item) => {}
 </script>
 
 <style lang="less" scoped>
