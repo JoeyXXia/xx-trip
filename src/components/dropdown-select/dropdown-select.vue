@@ -26,7 +26,13 @@
         title="筛选"
         :ref="dropdownItemRefs"
       >
-        <div class="dropdown-bar-panel-content"></div>
+        <div class="dropdown-bar-panel-content">
+          <side-bar class="top" :menu-data="item.subGroups">
+            <template #content="slotProps">
+              <p class="list-content">正在开发中。。。。</p>
+            </template>
+          </side-bar>
+        </div>
       </van-dropdown-item>
     </template>
   </van-dropdown-menu>
@@ -54,4 +60,37 @@ const options = [
 ]
 </script>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+@popupHeight: 500px;
+
+:global(.van-dropdown-menu .van-popup .van-sider-item) {
+  padding-left: 20px;
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+
+:global(.van-dropdown-menu .van-popup .van-sider-item::before) {
+  border-radius: 50%;
+  left: 8px;
+}
+
+:global(.van-dropdown-menu .van-sider-item__content) {
+  overflow: hidden;
+  max-height: 100%;
+}
+
+.dropdown-bar-panel-content {
+  position: relative;
+  height: @popupHeight;
+  overflow: hidden;
+  background-color: var(--van-sidebar-backgroud-color);
+}
+
+.bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+}
+</style>
