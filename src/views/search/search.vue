@@ -18,7 +18,9 @@
 
     <dropdown-select :item-data="searchTop"></dropdown-select>
 
-    <div class="tab-wrapper">优惠，多人入住</div>
+    <div class="tab-wrapper">
+      <tab-select></tab-select>
+    </div>
 
     <div class="list">search house</div>
 
@@ -32,6 +34,7 @@ import xxSearchBar from "@/components/search-bar/xx-searchbar.vue"
 import searchResultItem from "./cpns/search-result-item.vue"
 import searchPanel from "./cpns/search-panel.vue"
 import dropdownSelect from "@/components/dropdown-select/dropdown-select.vue"
+import TabSelect from "@/components/table-select/tab-select.vue"
 import { useRoute, useRouter } from "vue-router"
 import { ref } from "vue"
 import { getSearchResult, getSearchTop } from "@/services/modules/search"
