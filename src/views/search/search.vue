@@ -19,7 +19,7 @@
     <dropdown-select :item-data="searchTop"></dropdown-select>
 
     <div class="tab-wrapper">
-      <tab-select></tab-select>
+      <tab-select :item-data="searchResult.hotFilters"></tab-select>
     </div>
 
     <div class="list">search house</div>
@@ -55,11 +55,10 @@ const keyword = ref(PLACEHOLDER)
 // newwork request
 getSearchTop().then((res) => {
   searchTop.value = res.data.data.allConditions
-  console.log("searchTop", searchTop)
 })
 
 getSearchResult().then((res) => {
-  searchResult.value = res.data
+  searchResult.value = res.data.data
 })
 
 // click  event
