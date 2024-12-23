@@ -24,6 +24,15 @@
           </view-house-btns>
         </van-dropdown-item>
       </van-dropdown-menu>
+
+      <tab-select-item
+        v-else
+        :title="item.label"
+        :active="item.isSelect"
+        border-width="0px"
+        @tag-click="handleTagClick(item, index)"
+      >
+      </tab-select-item>
     </template>
   </div>
 </template>
@@ -43,17 +52,11 @@ const props = defineProps({
 const drownItemRef = {}
 const hotFilters = ref([])
 
-const value1 = ref(0)
-const option1 = [
-  { text: "全部商品", value: 0 },
-  { text: "新款商品", value: 1 },
-  { text: "活动商品", value: 2 },
-]
-
 watch(
   () => props.itemData,
   (newValue, oldValue) => {
     hotFilters.value = newValue
+    console.log("hotFilters value", hotFilters)
   }
 )
 
