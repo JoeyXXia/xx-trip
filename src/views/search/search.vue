@@ -23,7 +23,9 @@
     </div>
 
     <div class="list">
-      <search-list-item></search-list-item>
+      <template v-for="(item, index) in searchResult.items">
+        <search-list-item :item-data="item"></search-list-item>
+      </template>
     </div>
 
     <!-- <search-panel> </search-panel> -->

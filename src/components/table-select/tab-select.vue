@@ -56,7 +56,6 @@ watch(
   () => props.itemData,
   (newValue, oldValue) => {
     hotFilters.value = newValue
-    console.log("hotFilters value", hotFilters)
   }
 )
 
