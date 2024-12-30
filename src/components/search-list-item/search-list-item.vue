@@ -3,7 +3,9 @@
     <div class="swiper-wrapper">
       <img :src="houseData.defaultPicture" alt="swiper" class="banner" />
 
-      <div class="bottom"></div>
+      <div class="bottom">
+        <msg-tip :item-data="houseData.commentBriefForCD"></msg-tip>
+      </div>
       <div class="side-bar"></div>
     </div>
     <div class="content">
@@ -17,6 +19,7 @@
 <script setup>
 import SearchListItemTitle from "@/components/search-list-item-title/search-list-item-title.vue"
 import SearchListItemInfo from "@/components/search-list-item-info/search-list-item-info.vue"
+import MsgTip from "@/components/msg-tip/msg-tip.vue"
 import { computed, ref, watch } from "vue"
 
 const props = defineProps({
@@ -89,6 +92,10 @@ const getToolBarData = computed(() => {
     margin-bottom: 7px;
   }
   .bottom {
+    position: absolute;
+    bottom: 15px;
+    left: 10px;
+    right: 10px;
   }
   .side-bar {
   }
