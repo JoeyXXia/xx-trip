@@ -14,7 +14,7 @@
       <search-list-item-title
         :item-data="getTitleData"
       ></search-list-item-title>
-      <search-list-item-info></search-list-item-info>
+      <search-list-item-info :item-data="getInfoData"></search-list-item-info>
     </div>
   </div>
 </template>
