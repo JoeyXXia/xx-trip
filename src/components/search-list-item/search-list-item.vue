@@ -6,7 +6,9 @@
       <div class="bottom">
         <msg-tip :item-data="houseData.commentBriefForCD"></msg-tip>
       </div>
-      <div class="side-bar"></div>
+      <div class="side-bar">
+        <tool-bar :item-data="getToolBarData"></tool-bar>
+      </div>
     </div>
     <div class="content">
       <h2>search-list-item</h2>
@@ -20,6 +22,7 @@
 import SearchListItemTitle from "@/components/search-list-item-title/search-list-item-title.vue"
 import SearchListItemInfo from "@/components/search-list-item-info/search-list-item-info.vue"
 import MsgTip from "@/components/msg-tip/msg-tip.vue"
+import ToolBar from "@/components/tool-bar/tool-bar.vue"
 import { computed, ref, watch } from "vue"
 
 const props = defineProps({
@@ -98,6 +101,9 @@ const getToolBarData = computed(() => {
     right: 10px;
   }
   .side-bar {
+    position: absolute;
+    top: 10px;
+    right: 10px;
   }
 }
 </style>
