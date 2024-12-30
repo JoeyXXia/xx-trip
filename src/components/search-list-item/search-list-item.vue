@@ -11,8 +11,9 @@
       </div>
     </div>
     <div class="content">
-      <h2>search-list-item</h2>
-      <search-list-item-title></search-list-item-title>
+      <search-list-item-title
+        :item-data="getTitleData"
+      ></search-list-item-title>
       <search-list-item-info></search-list-item-info>
     </div>
   </div>
@@ -45,8 +46,8 @@ const getTitleData = computed(() => {
   let data = houseData.value
   return {
     address: data.address,
-    unit: data.unitSummaries[0]?.text,
-    unitDesp: data.unitSummaries[1]?.text,
+    unit: data.unitSummeries[0]?.text,
+    unitDesp: data.unitSummeries[1]?.text,
     unitName: data.unitName,
   }
 })
