@@ -2,7 +2,7 @@
   <div class="order-item">
     <order-item-title :item-data="getTitileData"></order-item-title>
     <order-item-info :item-data="getInfoData"></order-item-info>
-    <order-item-btn></order-item-btn>
+    <order-item-btn :item-data="getBtnData"></order-item-btn>
   </div>
 </template>
 
