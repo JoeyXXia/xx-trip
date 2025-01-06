@@ -12,25 +12,27 @@
         </template>
       </van-tabs>
     </van-sticky>
-  </div>
-  <div class="content">
-    <div>
-      <template v-for="(item, index) in orderList" :key="item">
-        {{ item }}
-      </template>
-    </div>
-    <div>
-      <img src="@/assets/img/order/icon-order.png" alt="" />
-      <div class="title">近期暂无订单</div>
+
+    <div class="content">
+      <div v-if="orderList.length">
+        <template v-for="(item, index) in orderList" :key="item">
+          <order-item :item-data="item"></order-item>
+        </template>
+      </div>
+      <div v-else="!orderList.length" class="tips">
+        <img src="@/assets/img/order/icon-order.png" alt="" />
+        <div class="title">近期暂无订单</div>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
 import { getOrderList } from "@/services"
-import { ref } from "vue"
+import { ref, watch } from "vue"
 
 import NavBar from "@/components/nav-bar/nav-bar.vue"
+import OrderItem from "./cpns/order-item/order-item.vue"
 
 const orderTitles = ["全部订单", "近期订单", "待支付"]
 const orderTitleType = ["all", "recent", "pend"]
@@ -40,6 +42,14 @@ const currentOrder = ref()
 
 getOrderList().then((res) => {
   orderList.value = res.data.data.orders || []
+})
+
+watch(currentOrder, (newVal, oldVal) => {
+  if (newVal !== undefined) {
+    getOrderList(orderTitleType[newVal]).then((res) => {
+      orderList.value = res.data.data.orders || []
+    })
+  }
 })
 </script>
 
@@ -52,6 +62,20 @@ getOrderList().then((res) => {
   .content {
     height: calc(100% - 86px);
     overflow: scroll;
+
+    .tips {
+      text-align: center;
+      margin-top: 80px;
+      img {
+        width: 80%;
+      }
+
+      .title {
+        margin-top: 20px;
+        color: #000;
+        font-size: 18px;
+      }
+    }
   }
 }
 </style>
