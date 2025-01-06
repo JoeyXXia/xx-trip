@@ -1,6 +1,6 @@
 <template>
   <div class="order-item">
-    <order-item-title></order-item-title>
+    <order-item-title :item-data="getTitileData"></order-item-title>
     <order-item-info></order-item-info>
     <order-item-btn></order-item-btn>
   </div>
